@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch trial</title>
+</head>
+<body>
+    <h1>My  Screenshot Album</h1>
+    <div class="album">
+       
+    </div>
+    <style>
+        .album{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+            margin: 50px;
+        }
+        p{
+            width: 200px;
+            padding: 10px;
+        }
+        #images{
+            margin: 10px;
+            border: 1px solid silver;
+        }
+
+    </style>
+    <script>
+        let url = "https://ezra-code.github.io/test-json/db.json"
+       function displayAlbum(item){
+        let album = document.querySelector('.album')
+        album.innerHTML += ` 
+            <div id="images">
+                <img src="${item.image}" alt="" id="image" height="250px" width="250px">
+                <p>Description: <span id="">${item.description}</span></p>  
+            </div>
+              
+        `
+       }
+        fetch(url)
+            .then(res => res.json())
+                .then(data => {
+                    let images = data.photos
+                    images.forEach(image => displayAlbum(image))
+                })
+    </script>
+</body>
+</html>
